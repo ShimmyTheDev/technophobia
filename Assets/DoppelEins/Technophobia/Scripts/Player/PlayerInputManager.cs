@@ -9,7 +9,7 @@ public class PlayerInputManager : MonoBehaviour, PlayerControls.IPlayerActions
     public Vector2 LookValue { get; private set; }
     public bool IsSprinting { get; private set; }
     public bool IsCrouching { get; private set; }
-    public bool IsInteracting { get; private set; }
+    public bool IsInteracting { get; set; }
     public event Action OnInteractionEvent;
     public event Action OnSprintEvent;
     public event Action OnCrouchEvent;
@@ -55,14 +55,6 @@ public class PlayerInputManager : MonoBehaviour, PlayerControls.IPlayerActions
     public void OnInteraction(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
-        if (IsInteracting)
-        {
-            IsInteracting = false;
-        }
-        else
-        {
-            IsInteracting = true;
-        }
         OnInteractionEvent?.Invoke();
     }
 
@@ -100,6 +92,5 @@ public class PlayerInputManager : MonoBehaviour, PlayerControls.IPlayerActions
     {
         if (!context.performed && !IsInteracting) return;
         lastKeystroke = context.control.name;
-        OnInteractionEvent?.Invoke();
     }
 }

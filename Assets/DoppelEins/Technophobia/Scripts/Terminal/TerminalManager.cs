@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -63,6 +64,7 @@ public class TerminalManager : MonoBehaviour
         if (!IsTyping && !CanEnterSolution)
         {
             IsTyping = true;
+            PlayerInputManager.Instance.IsInteracting = true;
             StartCoroutine(TypeTextOnScreen());
         }
     }
@@ -73,6 +75,8 @@ public class TerminalManager : MonoBehaviour
         {
             IsTyping = false;
         }
+        Camera.main.transform.rotation = Camera.main.transform.parent.rotation;
+        PlayerInputManager.Instance.IsInteracting = false;
     }
 
     private IEnumerator TypeTextOnScreen()
@@ -104,7 +108,12 @@ public class TerminalManager : MonoBehaviour
     public void OnPasswordInput(string key)
     {
         if (!CanEnterSolution) return;
-        passwordPrompt.GetComponent<TMP_Text>().color = Color.green;
+        if (passwordInput.text.Length == 4)
+        {
+            currentInput = "";
+            passwordInput.text = "";
+        }
+        passwordInput.color = Color.green;
 
 
         currentInput += key;
@@ -119,16 +128,12 @@ public class TerminalManager : MonoBehaviour
             {
                 Debug.Log("That's correct, disabling camera");
                 audioSource.PlayOneShot(success);
-
-
             }
             else
             {
                 Debug.Log("Incorrect solution, try again!");
-                passwordPrompt.GetComponent<TMP_Text>().color = Color.red;
+                passwordInput.color = Color.red;
                 audioSource.PlayOneShot(error);
-                currentInput = "";
-                passwordInput.text = "";
             }
         }
     }

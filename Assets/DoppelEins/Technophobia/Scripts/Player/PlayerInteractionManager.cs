@@ -5,6 +5,7 @@ public class PlayerInteractionManager : MonoBehaviour
 {
     private PlayerInputManager inputManager;
     private TerminalManager currentTerminal;
+    private CharacterController characterController;
     public bool CanInteractWithTerminal = false;
     public bool IsMovingToTerminalPosition = false;
     public bool CanEnableTerminal = false;
@@ -15,6 +16,7 @@ public class PlayerInteractionManager : MonoBehaviour
     void Awake()
     {
         inputManager = GetComponent<PlayerInputManager>();
+        characterController = GetComponent<CharacterController>();
         inputManager.OnInteractionEvent += OnInteract;
     }
 
@@ -31,7 +33,7 @@ public class PlayerInteractionManager : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Terminal"))
+        if (other.CompareTag("Terminal") && characterController.isGrounded)
         {
             CanInteractWithTerminal = true;
             currentTerminal = other.GetComponent<TerminalManager>();
@@ -43,10 +45,9 @@ public class PlayerInteractionManager : MonoBehaviour
         if (other.CompareTag("Terminal"))
         {
             CanInteractWithTerminal = false;
-            //currentTerminal.EndInteraction();
+            currentTerminal.EndInteraction();
             currentTerminal = null;
             IsMovingToTerminalPosition = false;
-            Camera.main.transform.rotation = Camera.main.transform.parent.rotation;
         }
     }
 
@@ -55,6 +56,10 @@ public class PlayerInteractionManager : MonoBehaviour
         if (CanInteractWithTerminal)
         {
             IsMovingToTerminalPosition = true;
+        }
+        if (PlayerInputManager.Instance.IsInteracting)
+        {
+            PlayerInputManager.Instance.IsInteracting = false;
         }
     }
 
