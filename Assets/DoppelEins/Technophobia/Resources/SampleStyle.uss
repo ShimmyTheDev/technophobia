@@ -1,0 +1,13 @@
+.mainmenu-title {
+    -unity-font-definition: url("project://database/Assets/DoppelEins/Technophobia/Fonts/VT323-Regular.ttf?fileID=12800000&guid=e8e2e3004900e694a8bc7480bda73ad4&type=3#VT323-Regular");
+    font-size: 90px;
+    -unity-font-style: bold;
+    color: rgb(22, 122, 23);
+}
+
+.mainmenu-element {
+    -unity-font-definition: url("project://database/Assets/DoppelEins/Technophobia/Fonts/VT323-Regular.ttf?fileID=12800000&guid=e8e2e3004900e694a8bc7480bda73ad4&type=3#VT323-Regular");
+    color: rgb(28, 152, 29);
+    font-size: 75px;
+    -unity-font-style: bold;
+}
