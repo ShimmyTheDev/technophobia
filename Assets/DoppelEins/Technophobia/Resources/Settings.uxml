@@ -1,5 +1,22 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <engine:VisualElement name="Root" style="flex-grow: 1; align-items: center; justify-content: center; background-color: rgb(0, 0, 0);">
-        <engine:VisualElement name="BorderBox" style="flex-grow: 0; height: 75%; width: 75%; border-left-color: rgb(48, 254, 49); border-right-color: rgb(48, 254, 49); border-top-color: rgb(48, 254, 49); border-bottom-color: rgb(48, 254, 49); border-top-width: 10px; border-right-width: 10px; border-bottom-width: 10px; border-left-width: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; align-items: center; justify-content: center;" />
+        <engine:VisualElement name="BorderBox" style="flex-grow: 0; height: 75%; width: 75%; border-left-color: rgb(48, 254, 49); border-right-color: rgb(48, 254, 49); border-top-color: rgb(48, 254, 49); border-bottom-color: rgb(48, 254, 49); border-top-width: 10px; border-right-width: 10px; border-bottom-width: 10px; border-left-width: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; align-items: center; justify-content: center; -unity-font-definition: url(&quot;project://database/Assets/DoppelEins/Technophobia/Fonts/VT323-Regular.ttf?fileID=12800000&amp;guid=e8e2e3004900e694a8bc7480bda73ad4&amp;type=3#VT323-Regular&quot;);">
+            <engine:VisualElement name="TitleElement" style="flex-grow: 0;">
+                <engine:Label text=".technophobia." style="-unity-font-definition: url(&quot;project://database/Assets/DoppelEins/Technophobia/Fonts/VT323-Regular.ttf?fileID=12800000&amp;guid=e8e2e3004900e694a8bc7480bda73ad4&amp;type=3#VT323-Regular&quot;); font-size: 90px; -unity-font-style: bold; color: rgb(22, 122, 23);" />
+            </engine:VisualElement>
+            <engine:VisualElement name="SpacerElement" style="flex-grow: 0; height: 10%;" />
+            <engine:VisualElement name="NewGameElement" style="flex-grow: 0;">
+                <engine:Label text="New Game" style="-unity-font-definition: url(&quot;project://database/Assets/DoppelEins/Technophobia/Fonts/VT323-Regular.ttf?fileID=12800000&amp;guid=e8e2e3004900e694a8bc7480bda73ad4&amp;type=3#VT323-Regular&quot;); color: rgb(28, 152, 29); font-size: 75px; -unity-font-style: bold;" />
+            </engine:VisualElement>
+            <engine:VisualElement name="OptionsElement" style="flex-grow: 0;">
+                <engine:Label text="Options" style="-unity-font-definition: url(&quot;project://database/Assets/DoppelEins/Technophobia/Fonts/VT323-Regular.ttf?fileID=12800000&amp;guid=e8e2e3004900e694a8bc7480bda73ad4&amp;type=3#VT323-Regular&quot;); color: rgb(28, 152, 29); font-size: 75px; -unity-font-style: bold;" />
+            </engine:VisualElement>
+            <engine:VisualElement name="CreditsElement" style="flex-grow: 0;">
+                <engine:Label text="Credits&#10;" style="-unity-font-definition: url(&quot;project://database/Assets/DoppelEins/Technophobia/Fonts/VT323-Regular.ttf?fileID=12800000&amp;guid=e8e2e3004900e694a8bc7480bda73ad4&amp;type=3#VT323-Regular&quot;); color: rgb(28, 152, 29); font-size: 75px; -unity-font-style: bold;" />
+            </engine:VisualElement>
+            <engine:VisualElement name="QuitGameElement" style="flex-grow: 0;">
+                <engine:Label text="Quit Game" style="-unity-font-definition: url(&quot;project://database/Assets/DoppelEins/Technophobia/Fonts/VT323-Regular.ttf?fileID=12800000&amp;guid=e8e2e3004900e694a8bc7480bda73ad4&amp;type=3#VT323-Regular&quot;); color: rgb(28, 152, 29); font-size: 75px; -unity-font-style: bold;" />
+            </engine:VisualElement>
+        </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>
