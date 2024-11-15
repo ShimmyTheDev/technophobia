@@ -55,16 +55,16 @@ public class TerminalManager : MonoBehaviour
 
     private void GetSolution()
     {
-        terminalSolution = GameManager.Instance.SecretCodes[0];
-        solutionCode = terminalSolution.Key;
+        // terminalSolution = GameManager.Instance.SecretCodes[0];
+        // solutionCode = terminalSolution.Key;
     }
 
     public void StartInteraction()
     {
+        PlayerInputManager.Instance.IsInteracting = true;
         if (!IsTyping && !CanEnterSolution)
         {
             IsTyping = true;
-            PlayerInputManager.Instance.IsInteracting = true;
             StartCoroutine(TypeTextOnScreen());
         }
     }

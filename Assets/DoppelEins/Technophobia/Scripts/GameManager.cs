@@ -2,15 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public List<KeyValuePair<string, bool>> SecretCodes = new List<KeyValuePair<string, bool>>();
+    public CameraManager[] cameras;
+    public List<KeyValuePair<string, CameraManager>> SecretCodes = new List<KeyValuePair<string, CameraManager>>();
     private static System.Random random = new System.Random();
     void Awake()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -29,14 +31,13 @@ public class GameManager : MonoBehaviour
 
     void GenerateSecretCodes()
     {
-        int iterations = 10;
         const string chars = "0123456789";
 
-        for (int i = 0; i < iterations; i++)
+        for (int i = 0; i < cameras.Length; i++)
         {
             string code = new string(Enumerable.Repeat(chars, 4)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
-            SecretCodes.Add(new KeyValuePair<string, bool>(code, false));
+            SecretCodes.Add(new KeyValuePair<string, CameraManager>(code, cameras[i]));
         }
     }
 
