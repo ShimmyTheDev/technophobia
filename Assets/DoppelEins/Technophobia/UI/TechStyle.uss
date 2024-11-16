@@ -1,0 +1,47 @@
+* {
+    -unity-font: url("project://database/Assets/DoppelEins/Technophobia/Fonts/VT323-Regular.ttf?fileID=12800000&guid=e8e2e3004900e694a8bc7480bda73ad4&type=3#VT323-Regular");
+    -unity-font-definition: initial;
+}
+
+.standard-ui-text{
+    -unity-font-style: bold;
+}
+
+.standard-ui-text.title {
+    font-size: 90px;
+    color: rgb(22, 122, 23);
+}
+
+.standard-ui-text.text-element {
+    font-size: 75px;
+    color: rgb(28, 152, 29);
+}
+
+.borderbox {
+    flex-grow: 0;
+    height: 75%;
+    width: 75%;
+    color: rgb(48, 254, 49);
+    border-left-color: rgb(48, 254, 49);
+    border-right-color: rgb(48, 254, 49);
+    border-top-color: rgb(48, 254, 49);
+    border-bottom-color: rgb(48, 254, 49);
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.pause {
+    opacity: 0;
+}
+
+.pause.pause-active {
+    opacity: 1;
+}
