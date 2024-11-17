@@ -37,7 +37,6 @@ public class MainMenuManager : MonoBehaviour
 
     private void OnNewGameButtonClicked()
     {
-        // TODO: change in the future, as this means we have the main game running in the background
         Debug.Log("New Game Started");
         HideMenu(mainMenu);
         SceneManager.LoadScene("Level01");
