@@ -1,44 +1,45 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = System.Random;
 
 public class GameManager : MonoBehaviour
 {
+    private static readonly Random random = new();
+
+    [Header("Gameplay settings")] public CameraManager[] cameras;
+
+    public List<KeyValuePair<string, CameraManager>> SecretCodes = new();
     public static GameManager Instance { get; private set; }
-    public List<KeyValuePair<string, bool>> SecretCodes = new List<KeyValuePair<string, bool>>();
-    private static System.Random random = new System.Random();
-    void Awake()
+
+    public bool SecrectsReady { get; private set; }
+
+    private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
         if (Instance != null && Instance != this)
-        {
             Destroy(this);
-        }
         else
-        {
             Instance = this;
-        }
         DontDestroyOnLoad(this);
     }
 
-    void Start()
+    private void Start()
     {
         GenerateSecretCodes();
     }
 
-    void GenerateSecretCodes()
+    private void GenerateSecretCodes()
     {
-        int iterations = 10;
         const string chars = "0123456789";
 
-        for (int i = 0; i < iterations; i++)
+        for (var i = 0; i < cameras.Length; i++)
         {
-            string code = new string(Enumerable.Repeat(chars, 4)
+            var code = new string(Enumerable.Repeat(chars, 4)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
-            SecretCodes.Add(new KeyValuePair<string, bool>(code, false));
+            SecretCodes.Add(new KeyValuePair<string, CameraManager>(code, cameras[i]));
         }
+
+        SecrectsReady = true;
     }
-
-
 }

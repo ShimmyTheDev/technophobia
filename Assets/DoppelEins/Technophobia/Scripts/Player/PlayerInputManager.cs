@@ -5,35 +5,26 @@ using UnityEngine.InputSystem;
 public class PlayerInputManager : MonoBehaviour, PlayerControls.IPlayerActions
 {
     public static PlayerInputManager Instance;
+    public string lastKeystroke = "";
+
+    private PlayerControls controls;
     public Vector2 MovementValue { get; private set; }
     public Vector2 LookValue { get; private set; }
     public bool IsSprinting { get; private set; }
     public bool IsCrouching { get; private set; }
     public bool IsInteracting { get; set; }
-    public event Action OnInteractionEvent;
-    public event Action OnSprintEvent;
-    public event Action OnCrouchEvent;
-    public event Action OnJumpEvent;
-    public event Action OnInputsEvent;
-    public string lastKeystroke = "";
 
-    private PlayerControls controls;
-
-    void Awake()
+    private void Awake()
     {
         if (Instance != null && Instance != this)
-        {
             Destroy(this);
-        }
         else
-        {
             Instance = this;
-        }
         controls = new PlayerControls();
         controls.Player.SetCallbacks(this);
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         controls.Player.Enable();
     }
@@ -67,13 +58,8 @@ public class PlayerInputManager : MonoBehaviour, PlayerControls.IPlayerActions
     public void OnSprint(InputAction.CallbackContext context)
     {
         if (context.performed)
-        {
             IsSprinting = true;
-        }
-        else if (context.canceled)
-        {
-            IsSprinting = false;
-        }
+        else if (context.canceled) IsSprinting = false;
     }
 
     public void OnLook(InputAction.CallbackContext context)
@@ -93,4 +79,10 @@ public class PlayerInputManager : MonoBehaviour, PlayerControls.IPlayerActions
         if (!context.performed && !IsInteracting) return;
         lastKeystroke = context.control.name;
     }
+
+    public event Action OnInteractionEvent;
+    public event Action OnSprintEvent;
+    public event Action OnCrouchEvent;
+    public event Action OnJumpEvent;
+    public event Action OnInputsEvent;
 }
