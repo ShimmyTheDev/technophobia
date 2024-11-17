@@ -39,7 +39,7 @@ public class MainMenuManager : MonoBehaviour
         // TODO: change in the future, as this means we have the main game running in the background
         Debug.Log("New Game Started");
         HideMenu();
-        StartCoroutine(LoadSceneAsync("Level01"));
+        SceneManager.LoadScene("Level01");
     }
     private void OnOptionButtonClicked()
     {
@@ -61,19 +61,5 @@ public class MainMenuManager : MonoBehaviour
     public void HideMenu()
     {
         mainMenu.SetActive(false);
-    }
-
-    private IEnumerator LoadSceneAsync(string sceneName)
-    {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-
-        while (!asyncLoad.isDone)
-        {
-            // Optionally, you can add a loading screen or progress bar here
-            yield return null; // Wait until the next frame
-        }
-        
-        // Optionally, you can show a message or do something after loading is complete
-        Debug.Log("Scene Loaded: " + sceneName);
     }
 }
