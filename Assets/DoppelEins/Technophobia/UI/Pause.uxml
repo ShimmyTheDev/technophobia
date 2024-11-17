@@ -1,18 +1,12 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/DoppelEins/Technophobia/UI/TechStyle.uss?fileID=7433441132597879392&amp;guid=3864bb686046ec847a5fd79c09dd4cec&amp;type=3#TechStyle" />
     <engine:VisualElement name="Root" style="flex-grow: 1; align-items: center; justify-content: center; background-color: rgb(0, 0, 0);">
-        <engine:VisualElement name="BorderBox" class="borderbox" >
-            <engine:VisualElement name="TitleElement" style="flex-grow: 0;">
-                <engine:Label text=".paused." class="mainmenu-title" />
-            </engine:VisualElement>
-            <engine:VisualElement name="SpacerElement" class="hiddenhelper" style="flex-grow: 0; height: 10%;" />
-            <engine:VisualElement name="ResumeGameElement" style="flex-grow: 0; flex-direction: row;">
-                <engine:Label text="Resume Game" class="mainmenu-element" />
-            </engine:VisualElement>
-            <engine:VisualElement name="SpacerElement" class="hiddenhelper" style="flex-grow: 0; height: 5%;" />
-            <engine:VisualElement name="QuitGameElement" style="flex-grow: 0; flex-direction: row;">
-                <engine:Label text="Quit Game" style="-unity-font-definition: url(&quot;project://database/Assets/DoppelEins/Technophobia/Fonts/VT323-Regular.ttf?fileID=12800000&amp;guid=e8e2e3004900e694a8bc7480bda73ad4&amp;type=3#VT323-Regular&quot;); color: rgb(28, 152, 29); font-size: 75px; -unity-font-style: bold;" />
-            </engine:VisualElement>
+        <engine:VisualElement name="BorderBox" class="borderbox">
+            <engine:Label text=".paused." class="title standard-ui-text" />
+            <engine:VisualElement class="spacer" />
+            <engine:Button name="ResumeButton" text="Resume Game" class="standard-ui-text text-element button" />
+            <engine:Button name="OptionButton" text="Options" class="standard-ui-text text-element button" />
+            <engine:Button name="QuitGameButton" text="Quit Game" class="standard-ui-text text-element button" />
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>
