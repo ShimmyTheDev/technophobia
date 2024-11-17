@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -16,12 +15,13 @@ public class TerminalManager : MonoBehaviour
     [SerializeField] AudioClip success;
     [SerializeField] string[] terminalMessages;
     [SerializeField] string secretMessage;
+    public CameraManager targetCamera;
     private AudioSource audioSource;
-    public KeyValuePair<string, bool> terminalSolution;
-    public string solutionCode;
     bool IsTyping = false;
     bool CanEnterSolution = false;
     private string currentInput = "";
+
+    private List<KeyValuePair<CameraManager, string>> cameras = new List<KeyValuePair<CameraManager, string>>();
 
     private void Start()
     {
@@ -32,15 +32,8 @@ public class TerminalManager : MonoBehaviour
 
     private void Update()
     {
-        if (solutionCode == "")
-        {
-            GetSolution();
-        }
-
         if (CanEnterSolution && !IsTyping)
         {
-
-
             for (int i = 0; i <= 9; i++)
             {
                 if (Input.GetKeyDown(i.ToString()))
@@ -51,12 +44,6 @@ public class TerminalManager : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void GetSolution()
-    {
-        // terminalSolution = GameManager.Instance.SecretCodes[0];
-        // solutionCode = terminalSolution.Key;
     }
 
     public void StartInteraction()
@@ -119,27 +106,34 @@ public class TerminalManager : MonoBehaviour
         currentInput += key;
         passwordInput.text = currentInput;
         audioSource.PlayOneShot(beep);
-        Debug.Log("Current input: " + currentInput);
-
 
         if (currentInput.Length == 4)
         {
-            if (IsValidSolution())
+            CheckSoultion();
+            if (targetCamera != null)
             {
-                Debug.Log("That's correct, disabling camera");
+                targetCamera.DisableCamera();
                 audioSource.PlayOneShot(success);
             }
             else
             {
-                Debug.Log("Incorrect solution, try again!");
                 passwordInput.color = Color.red;
                 audioSource.PlayOneShot(error);
             }
         }
     }
 
-    private bool IsValidSolution()
+    private void CheckSoultion()
     {
-        return currentInput == solutionCode;
+        List<KeyValuePair<string, CameraManager>> cameraPairs = GameManager.Instance.SecretCodes;
+        foreach (KeyValuePair<string, CameraManager> pair in cameraPairs)
+        {
+            if (pair.Key == currentInput)
+            {
+
+                targetCamera = pair.Value;
+            }
+        }
     }
+
 }

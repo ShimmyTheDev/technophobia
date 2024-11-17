@@ -1,11 +1,12 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
 public class CameraManager : MonoBehaviour
 {
-    public string Passcode { get; private set; }
-    [SerializeField] private bool isEnabled = false;
+    public string Passcode;
+    public bool isEnabled { get; private set; } = true;
     public event Action OnState;
 
     [Header("Cone Settings")]
@@ -28,7 +29,23 @@ public class CameraManager : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.secrectsReady && Passcode == "")
+        {
+            GetPasscode();
+        }
         FollowConeTipTransform();
+    }
+
+    private void GetPasscode()
+    {
+        List<KeyValuePair<string, CameraManager>> cameraPairs = GameManager.Instance.SecretCodes;
+        foreach (KeyValuePair<string, CameraManager> pair in cameraPairs)
+        {
+            if (pair.Value == this)
+            {
+                Passcode = pair.Key;
+            }
+        }
     }
 
     private void CreateConeObject()
@@ -45,9 +62,9 @@ public class CameraManager : MonoBehaviour
         meshCollider = coneObject.AddComponent<MeshCollider>();
 
         meshRenderer.material = coneMaterial;
-
         meshCollider.convex = true;
         meshCollider.isTrigger = true;
+        coneObject.AddComponent<TriggerDetection>();
     }
 
     private void GenerateConeMesh()
@@ -90,9 +107,18 @@ public class CameraManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.name + " entered");
         if (other.CompareTag("Player"))
         {
             Debug.Log("GOCHA!");
         }
+    }
+
+    public void DisableCamera()
+    {
+        Debug.Log("Disabling camera");
+        coneObject.SetActive(false);
+        GetComponent<Animation>().enabled = false;
+        isEnabled = false;
     }
 }

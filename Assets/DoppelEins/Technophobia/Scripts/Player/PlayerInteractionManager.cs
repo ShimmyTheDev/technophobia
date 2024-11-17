@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PlayerInteractionManager : MonoBehaviour
@@ -42,7 +41,7 @@ public class PlayerInteractionManager : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Terminal"))
+        if (other.CompareTag("Terminal") && currentTerminal != null)
         {
             CanInteractWithTerminal = false;
             currentTerminal.EndInteraction();
@@ -60,6 +59,10 @@ public class PlayerInteractionManager : MonoBehaviour
         if (PlayerInputManager.Instance.IsInteracting)
         {
             PlayerInputManager.Instance.IsInteracting = false;
+            CanInteractWithTerminal = false;
+            currentTerminal.EndInteraction();
+            currentTerminal = null;
+            IsMovingToTerminalPosition = false;
         }
     }
 
@@ -72,8 +75,6 @@ public class PlayerInteractionManager : MonoBehaviour
         float distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(targetPosition.x, 0, targetPosition.z));
         float rotationDifference = Quaternion.Angle(transform.rotation, currentTerminal.playerPosition.rotation);
 
-        Debug.Log("DistanceDiff: " + distanceToTarget + " | RotationDiff: " + rotationDifference);
-
         // Adjusted thresholds for snapping
         float positionThreshold = 0.1f;
         float rotationThreshold = 2.0f;
@@ -81,7 +82,6 @@ public class PlayerInteractionManager : MonoBehaviour
         // Snap to the target if within the thresholds
         if (distanceToTarget <= positionThreshold && rotationDifference <= rotationThreshold)
         {
-            Debug.Log("Reached target. Snapping to exact position and rotation.");
             IsMovingToTerminalPosition = false;
 
             // Finalize exact position and rotation

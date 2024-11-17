@@ -1,14 +1,14 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public CameraManager[] cameras;
     public List<KeyValuePair<string, CameraManager>> SecretCodes = new List<KeyValuePair<string, CameraManager>>();
+    public bool secrectsReady { get; private set; } = false;
+
     private static System.Random random = new System.Random();
     void Awake()
     {
@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
                 .Select(s => s[random.Next(s.Length)]).ToArray());
             SecretCodes.Add(new KeyValuePair<string, CameraManager>(code, cameras[i]));
         }
+
+        secrectsReady = true;
     }
-
-
 }
