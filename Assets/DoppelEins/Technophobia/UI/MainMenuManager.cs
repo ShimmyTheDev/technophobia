@@ -8,6 +8,7 @@ public class MainMenuManager : MonoBehaviour
 {
     public VisualElement ui;
     public GameObject mainMenu;
+    public GameObject optionMenu;
 
     public Button newGameButton;
     public Button optionButton;
@@ -38,12 +39,14 @@ public class MainMenuManager : MonoBehaviour
     {
         // TODO: change in the future, as this means we have the main game running in the background
         Debug.Log("New Game Started");
-        HideMenu();
+        HideMenu(mainMenu);
         SceneManager.LoadScene("Level01");
     }
     private void OnOptionButtonClicked()
     {
         Debug.Log("Option Button Clicked");
+        HideMenu(mainMenu);
+        optionMenu.SetActive(true);
     }
     private void CreditsGameButtonClicked()
     {
@@ -58,8 +61,8 @@ public class MainMenuManager : MonoBehaviour
         #endif
     }
 
-    public void HideMenu()
+    public void HideMenu(GameObject menu)
     {
-        mainMenu.SetActive(false);
+        menu.SetActive(false);
     }
 }
