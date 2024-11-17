@@ -15,6 +15,7 @@
                 <engine:Label text="Enable Music" style="left: -30%;" />
                 <engine:Toggle name="ToggleMusic" style="scale: 2 2; left: 11%; top: 14%;" />
             </engine:VisualElement>
+            <engine:Button name="BackButton" text="Back" class="standard-ui-text text-element button" />
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>
