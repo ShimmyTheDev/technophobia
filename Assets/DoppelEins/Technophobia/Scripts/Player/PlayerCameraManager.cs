@@ -2,29 +2,29 @@ using UnityEngine;
 
 public class PlayerCameraManager : MonoBehaviour
 {
-    [SerializeField] Transform cameraHolder;
-    [SerializeField] float mouseSensitivity = 1f;
-
-    private float xRotation = 0f;
+    [SerializeField] private Transform cameraHolder;
+    [SerializeField] private float mouseSensitivity = 1f;
 
     private PlayerInputManager inputManager;
 
-    void Awake()
+    private float xRotation;
+
+    private void Awake()
     {
         inputManager = GetComponent<PlayerInputManager>();
     }
 
-    void Update()
+    private void Update()
     {
         RotateCamera();
     }
 
-    void RotateCamera()
+    private void RotateCamera()
     {
-        Vector2 lookInput = inputManager.LookValue;
+        var lookInput = inputManager.LookValue;
 
-        float mouseX = lookInput.x * mouseSensitivity;
-        float mouseY = lookInput.y * mouseSensitivity;
+        var mouseX = lookInput.x * mouseSensitivity;
+        var mouseY = lookInput.y * mouseSensitivity;
 
         transform.Rotate(Vector3.up * mouseX);
 

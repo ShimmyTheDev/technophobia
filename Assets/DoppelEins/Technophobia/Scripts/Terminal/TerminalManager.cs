@@ -6,44 +6,38 @@ using UnityEngine;
 public class TerminalManager : MonoBehaviour
 {
     public Transform playerPosition;
-    [SerializeField] Canvas TerminalDisplay;
-    [SerializeField] GameObject passwordPrompt;
-    [SerializeField] TMP_Text passwordInput;
-    [SerializeField] TMP_Text tmp;
-    [SerializeField] AudioClip beep;
-    [SerializeField] AudioClip error;
-    [SerializeField] AudioClip success;
-    [SerializeField] string[] terminalMessages;
-    [SerializeField] string secretMessage;
+    [SerializeField] private Canvas TerminalDisplay;
+    [SerializeField] private GameObject passwordPrompt;
+    [SerializeField] private TMP_Text passwordInput;
+    [SerializeField] private TMP_Text tmp;
+    [SerializeField] private AudioClip beep;
+    [SerializeField] private AudioClip error;
+    [SerializeField] private AudioClip success;
+    [SerializeField] private string[] terminalMessages;
+    [SerializeField] private string secretMessage;
     public CameraManager targetCamera;
     private AudioSource audioSource;
-    bool IsTyping = false;
-    bool CanEnterSolution = false;
-    private string currentInput = "";
 
-    private List<KeyValuePair<CameraManager, string>> cameras = new List<KeyValuePair<CameraManager, string>>();
+    private List<KeyValuePair<CameraManager, string>> cameras = new();
+    private bool CanEnterSolution;
+    private string currentInput = "";
+    private bool IsTyping;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         passwordInput.gameObject.SetActive(false);
-
     }
 
     private void Update()
     {
         if (CanEnterSolution && !IsTyping)
-        {
-            for (int i = 0; i <= 9; i++)
-            {
+            for (var i = 0; i <= 9; i++)
                 if (Input.GetKeyDown(i.ToString()))
                 {
-
                     OnPasswordInput(i.ToString());
                     break;
                 }
-            }
-        }
     }
 
     public void StartInteraction()
@@ -58,10 +52,7 @@ public class TerminalManager : MonoBehaviour
 
     public void EndInteraction()
     {
-        if (IsTyping)
-        {
-            IsTyping = false;
-        }
+        if (IsTyping) IsTyping = false;
         Camera.main.transform.rotation = Camera.main.transform.parent.rotation;
         PlayerInputManager.Instance.IsInteracting = false;
     }
@@ -69,12 +60,12 @@ public class TerminalManager : MonoBehaviour
     private IEnumerator TypeTextOnScreen()
     {
         tmp.text = "";
-        foreach (string msg in terminalMessages)
+        foreach (var msg in terminalMessages)
         {
             if (!IsTyping) yield break;
 
             tmp.text += "\n";
-            foreach (char c in msg)
+            foreach (var c in msg)
             {
                 tmp.text += c;
                 audioSource.PlayOneShot(beep);
@@ -100,6 +91,7 @@ public class TerminalManager : MonoBehaviour
             currentInput = "";
             passwordInput.text = "";
         }
+
         passwordInput.color = Color.green;
 
 
@@ -125,15 +117,9 @@ public class TerminalManager : MonoBehaviour
 
     private void CheckSoultion()
     {
-        List<KeyValuePair<string, CameraManager>> cameraPairs = GameManager.Instance.SecretCodes;
-        foreach (KeyValuePair<string, CameraManager> pair in cameraPairs)
-        {
+        var cameraPairs = GameManager.Instance.SecretCodes;
+        foreach (var pair in cameraPairs)
             if (pair.Key == currentInput)
-            {
-
                 targetCamera = pair.Value;
-            }
-        }
     }
-
 }
