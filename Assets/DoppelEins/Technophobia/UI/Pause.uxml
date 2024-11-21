@@ -1,0 +1,12 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/DoppelEins/Technophobia/UI/TechStyle.uss?fileID=7433441132597879392&amp;guid=3864bb686046ec847a5fd79c09dd4cec&amp;type=3#TechStyle" />
+    <engine:VisualElement name="Overlay" class="overlay">
+        <engine:VisualElement name="BorderBox" class="borderbox">
+            <engine:Label text=".paused." class="title standard-ui-text" />
+            <engine:VisualElement class="spacer" />
+            <engine:Button name="ResumeButton" text="Resume Game" class="standard-ui-text text-element button" />
+            <engine:Button name="OptionButton" text="Options" class="standard-ui-text text-element button" />
+            <engine:Button name="QuitGameButton" text="Quit Game" class="standard-ui-text text-element button" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
