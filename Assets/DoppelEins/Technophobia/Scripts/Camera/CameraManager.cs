@@ -13,6 +13,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private float coneRadius = 3f; // Radius at the base of the cone
     [SerializeField] private Material coneMaterial; // Material for the cone
     [SerializeField] private float coneOffsetZ = 1f; // Offset along the Z-axis
+    public event Action CameraStatusChanged; 
     private Mesh coneMesh;
 
     private GameObject coneObject;
@@ -111,5 +112,6 @@ public class CameraManager : MonoBehaviour
         coneObject.SetActive(false);
         GetComponent<Animation>().enabled = false;
         isEnabled = false;
+        CameraStatusChanged?.Invoke();
     }
 }
