@@ -39,8 +39,6 @@ public class CameraManager : MonoBehaviour
         if (other.CompareTag("Player")) Debug.Log("GOCHA!");
     }
 
-    public event Action OnState;
-
     private void GetPasscode()
     {
         var cameraPairs = GameManager.Instance.SecretCodes;

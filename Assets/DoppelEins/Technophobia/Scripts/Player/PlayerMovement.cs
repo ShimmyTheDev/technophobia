@@ -93,7 +93,6 @@ public class PlayerMovement : MonoBehaviour
             Time.fixedDeltaTime);
 
         controller.Move(currentMovement * Time.fixedDeltaTime);
-        Debug.Log(currentMovement.magnitude);
     }
 
     private void ApplyGravity()

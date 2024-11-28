@@ -1,15 +1,17 @@
+using TMPro;
 using UnityEngine;
 
 public class PlayerInteractionManager : MonoBehaviour
 {
     public bool CanInteractWithTerminal;
     public bool IsMovingToTerminalPosition;
-    public bool CanEnableTerminal;
+    public bool IsInteracting;
 
     public Camera mainCamera;
     private CharacterController characterController;
     private TerminalManager currentTerminal;
     private PlayerInputManager inputManager;
+    public TMP_Text interactionUiText;
 
 
     private void Awake()
@@ -17,6 +19,7 @@ public class PlayerInteractionManager : MonoBehaviour
         inputManager = GetComponent<PlayerInputManager>();
         characterController = GetComponent<CharacterController>();
         inputManager.OnInteractionEvent += OnInteract;
+        gameObject.GetComponentInChildren<TMP_Text>();
     }
 
     private void FixedUpdate()
@@ -36,6 +39,9 @@ public class PlayerInteractionManager : MonoBehaviour
         {
             CanInteractWithTerminal = true;
             currentTerminal = other.GetComponent<TerminalManager>();
+            interactionUiText.gameObject.SetActive(true);
+            IsInteracting = true;
+            interactionUiText.text = "PRESS [E] TO INTERACT";
         }
     }
 
@@ -44,9 +50,16 @@ public class PlayerInteractionManager : MonoBehaviour
         if (other.CompareTag("Terminal") && currentTerminal != null)
         {
             CanInteractWithTerminal = false;
+            interactionUiText.gameObject.SetActive(false);
             currentTerminal.EndInteraction();
             currentTerminal = null;
+            IsInteracting = false;
             IsMovingToTerminalPosition = false;
+        }
+
+        if (other.CompareTag("Terminal"))
+        {
+            
         }
     }
 
